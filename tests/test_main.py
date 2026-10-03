@@ -1,4 +1,4 @@
-from src.loader import load_schema
+from src.loader_module import load_schema
 
 schema_data = load_schema("master.sql")
 

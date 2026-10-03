@@ -21,7 +21,7 @@ def load_schema(file_name: str):
             with open(schema_file, 'r', encoding="utf-8") as f:
                 if f:
                     schema_content = f.read()
-                    return schema_content
+                    return schema_content.strip()
                 else:
                     raise SchemaFileEmptyError
         except PermissionError as e:
