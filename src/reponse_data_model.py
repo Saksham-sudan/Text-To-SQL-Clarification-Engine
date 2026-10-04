@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, ValidationError, model_validator
 
 class MasterModel(BaseModel):
     """this object acts as a routing engine to either clarify an ambiguous database request or output a final, valid PostgreSQL query."""
@@ -28,4 +28,11 @@ class MasterModel(BaseModel):
 
     @model_validator(mode='after')
     def validator_func(self):
+        if self.is_ambiguous == True:
+            if (self.clarifying_question == None or self.system_memory == None or self.final_response != None):
+                raise ValidationError
+        else:
+            if (self.clarifying_question == str or self.system_memory == str or self.final_response == None):
+                raise ValidationError
+            
         return self
