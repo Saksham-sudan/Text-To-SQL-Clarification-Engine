@@ -1,6 +1,6 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
-class MasterConstraint(BaseModel):
+class MasterModel(BaseModel):
     """this object acts as a routing engine to either clarify an ambiguous database request or output a final, valid PostgreSQL query."""
 
     reasoning_summary : str = Field(
@@ -25,3 +25,7 @@ class MasterConstraint(BaseModel):
         default= None,
         description= "If is_ambiguous = False then only this field must contain only the raw executable PostgreSQL. you are forbiden from write markdown code fences, explanations, or trailing semicolons for this field"
     )
+
+    @model_validator(mode='after')
+    def validator_func(self):
+        return self
