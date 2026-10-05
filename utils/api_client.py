@@ -19,6 +19,8 @@ response = client.interactions.create(
     input = "who was the best customer last month",
     response_format={
         "mime_type": "application/json",
+
+        
         "schema": data_model.model_json_schema()
     },
     generation_config={
