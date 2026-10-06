@@ -1,4 +1,5 @@
 .venv/
 .vscode/
+utils/__pycache__/
 .env
 TTSCE Comments.md
